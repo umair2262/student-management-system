@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Staff Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Staff Dashboard</h2>
+    <p>Welcome, {{ user.username }}</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Mark Attendance</h5>
+                    
+                    <p class="card-text">Mark student attendance for your classes.</p>
+                    <a href="{% url 'mark_attendance' %}" class="btn btn-success">mark_attendance</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">View Attendance Reports</h5>
+                    <p class="card-text">Check attendance reports of your students.</p>
+                    <a href="#" class="btn btn-light">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'profile' %}" class="btn btn-secondary mt-3">Edit Profile</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger mt-3">Logout</a>
+</div>
+{% endblock %}

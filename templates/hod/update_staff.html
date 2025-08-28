@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Update Staff: {{ staff.user.username }}</h2>
+
+  <div class="card shadow-lg rounded-3">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <div class="mt-3">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Update
+          </button>
+          <a href="{% url 'hod_dashboard' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

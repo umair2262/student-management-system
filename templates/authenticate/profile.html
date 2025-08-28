@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Profile</h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        {% if user.profile_pic %}
+                            <img src="{{ user.profile_pic.url }}" class="rounded-circle" alt="Profile Picture" width="150" height="150">
+                        {% else %}
+                            <img src="{% static 'images/default_profile.png' %}" class="rounded-circle" alt="Default Profile Picture" width="150" height="150">
+                        {% endif %}
+                    </div>
+                    
+                    <h5 class="text-center">{{ user.username }}</h5>
+                    <p class="text-center text-muted">{{ user.email }}</p>
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-success">Update Profile</button>
+                        </div>
+                    </form>
+
+                    <a href="{% url 'logout' %}" class="btn btn-danger mt-3 w-100">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

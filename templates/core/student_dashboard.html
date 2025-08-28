@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Student Dashboard</h2>
+    <p>Welcome, {{ user.username }}</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">View Attendance</h5>
+                    <p class="card-text">Check your attendance status for all courses.</p>
+                    <a href="#" class="btn btn-light">Go</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">View Courses</h5>
+                    <p class="card-text">See the courses you are enrolled in.</p>
+                    <a href="#" class="btn btn-light">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'profile' %}" class="btn btn-secondary mt-3">Edit Profile</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger mt-3">Logout</a>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Home - Student Management System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="container-fluid bg-primary text-white py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/images/hero-bg.jpg') no-repeat center center; background-size: cover;">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Welcome to Student Management System</h1>
+        <p class="lead mb-4">Manage students, courses, attendance, and grades efficiently.</p>
+        <a href="{% url 'login' %}" class="btn btn-light btn-lg mx-2">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-light btn-lg mx-2">Register</a>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Features</h2>
+    <div class="row g-4 text-center">
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <i class="bi bi-person-lock display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Secure Login</h5>
+                    <img src="/static/images/sec.png" alt="Students Illustration" class="img-fluid">
+                    <p class="card-text">Role-based access for Admin, Teacher, and Student.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <i class="bi bi-people display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Manage Users</h5>
+                    <img src="/static/images/manage.png" alt="Students Illustration" class="img-fluid">
+                    <p class="card-text">Create, update, and manage students and teachers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <i class="bi bi-calendar-check display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Attendance</h5>
+                    <img src="/static/images/attend.jpg" alt="Students Illustration" class="img-fluid">
+                    <p class="card-text">Track attendance of students efficiently.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <i class="bi bi-card-checklist display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Grades</h5>
+                    <img src="/static/images/grade.png" alt="Students Illustration" class="img-fluid">
+                    <p class="card-text">Record and view student grades easily.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Section -->
+<div class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h3>About the System</h3>
+            <p>The Student Management System simplifies administrative and academic tasks for schools and universities by providing role-based dashboards, secure access, and easy management of courses, attendance, and grades.</p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="/static/images/im.png" alt="Students Illustration" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock %}

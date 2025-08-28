@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add Attendance{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="mb-4 text-center">Add Attendance</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Select Student -->
+            <div class="mb-3">
+                <label for="student" class="form-label">Select Student</label>
+                <select id="student" name="student" class="form-select" required>
+                    <option value="">-- Choose Student --</option>
+                    {% for student in students %}
+                        <option value="{{ student.id }}">{{ student.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Select Subject -->
+            <div class="mb-3">
+                <label for="subject" class="form-label">Select Subject</label>
+                <select id="subject" name="subject" class="form-select" required>
+                    <option value="">-- Choose Subject --</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+
+            <!-- Attendance Status -->
+            <div class="mb-3">
+                <label for="status" class="form-label">Attendance Status</label>
+                <select id="status" name="status" class="form-select" required>
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-5">Save Attendance</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
