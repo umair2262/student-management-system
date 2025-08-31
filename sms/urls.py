@@ -26,6 +26,7 @@ urlpatterns = [
     path('auth/', include('authenticate.urls')),
     path('/hod/', include('hod.urls')),
     path('staff/', include('staff.urls')),
+    path('student/', include('student.urls')),
     
     
     

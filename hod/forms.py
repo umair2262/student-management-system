@@ -73,4 +73,4 @@ class CourseForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = ['subject', 'staff']
+        fields = ['student',  'status']

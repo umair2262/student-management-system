@@ -1,0 +1,27 @@
+<!-- templates/student/view_courses.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center">My Courses</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for subject in subjects %}
+    <tr>
+      <td>{{ student.name }}</td>
+      <td>{{ subject.course.name }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">No subjects assigned yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

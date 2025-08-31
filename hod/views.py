@@ -305,7 +305,7 @@ def delete_course(request, course_id):
 
 # hod/views.py
 
-from .models import Attendance, AttendanceReport, Subject
+from .models import Attendance
 
 
 # def add_attendance(request):
@@ -319,44 +319,34 @@ from .models import Attendance, AttendanceReport, Subject
 
 from datetime import date
 
+@login_required
 def add_attendance(request):
     courses = Course.objects.all()
+    students = CustomUser.objects.filter(role="STUDENT")
+
     if request.method == "POST":
         course_id = request.POST.get("course")
-        subject = request.POST.get("subject") 
         course = Course.objects.get(id=course_id)
-        staff = request.user
+        staff = request.user  
 
-        # Attendance create
-        attendance = Attendance.objects.create(
-            course=course,
-            subject=subject,
-            staff=staff,
-            date=date.today()
-        )
-
-        # Students ke liye attendance save
-        students = CustomUser.objects.filter(role="STUDENT")
         for student in students:
-            status = request.POST.get(f"status_{student.id}") == "on"  # checkbox checked?
-            AttendanceReport.objects.create(
+            status = request.POST.get(f"status_{student.id}")  # "Present"/"Absent"
+            Attendance.objects.create(
                 course=course,
                 student=student,
-                attendance=attendance,
+                staff=staff,
+                date=date.today(),
                 status=status
             )
 
-        return redirect("view_attendance")  # redirect to attendance view
+        messages.success(request, "Attendance marked successfully!")
+        return redirect("view_attendance")
 
-    students = CustomUser.objects.filter(role="STUDENT")
-    course = Course.objects.all()
-    return render(request, "hod/add_attendance.html", {"students": students, "course": course})
-
-
-
-
+    return render(request, "hod/add_attendance.html", {
+        "students": students,
+        "courses": courses
+    })
+@login_required
 def view_attendance(request):
-    attendance_reports = AttendanceReport.objects.all().order_by('-attendance__date')
-    return render(request, "hod/view_attendance.html", {"attendance_reports": attendance_reports})
-
-
+    attendances = Attendance.objects.all().order_by('-date')
+    return render(request, "hod/view_attendance.html", {"attendances": attendances})
