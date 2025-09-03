@@ -15,7 +15,7 @@ def view_attendance(request):
     return render(request, "hod/view_attendance.html", {"attendances": attendances})
 @login_required
 def view_courses(request):
-    student = Student.objects.get(user=request.user)  
-    courses = [student.course]
-    return render(request, "student/view_courses.html", {"courses": courses})
+    student = Student.objects.get(user=request.user) 
+    courses = student.course.all() 
+    return render(request, "student/view_courses.html", {"student": student, "courses": courses})
 

@@ -13,7 +13,7 @@ from authenticate.models import CustomUser
 from core.models import Staff, Student
 from django.contrib.auth import get_user_model
 from django.template.loader import get_template
-
+from core.models import *
 
 
 # HOD login view
@@ -63,7 +63,7 @@ def add_staff(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
 
-            # 1) CustomUser banao
+            # 1) CustomUser banana
             user = CustomUser.objects.create_user(
                 username=username,
                 email=email,
@@ -74,10 +74,10 @@ def add_staff(request):
             # 2) Staff banao
             Staff.objects.create(user=user)
 
-            # 3)  Staff ko turant login karao
+            # 3)  Staff pr login 
             login(request, user)
 
-            # 4) ✅ Staff dashboard par redirect karo
+            # 4)  Staff dashboard par redirect 
             return redirect("staff_dashboard")
 
     else:
@@ -126,13 +126,13 @@ def delete_staff(request, staff_id):
 
 # student  ko add , delete, edit krna
 
-# ✅ Manage Student (list all students)
 @login_required
 def manage_student(request):
-    students = Student.objects.all()
+    hod_user=HOD.objects.filter(user=request.user).first()
+    students = Student.objects.filter(hod=hod_user)
     return render(request, "hod/manage_student.html", {"students": students})
 
-# ✅ Add Student
+
 @login_required
 def add_student(request):
     if request.method == "POST":
@@ -142,6 +142,7 @@ def add_student(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             roll_no = form.cleaned_data['roll_no']
+
 
             # 1) Check if CustomUser already exists (deleted ya pehle ka user)
             user, created = CustomUser.objects.get_or_create(
@@ -164,8 +165,10 @@ def add_student(request):
             user.save()
 
             # 2) Student ko bhi check karo
+            hod_user=HOD.objects.filter(user=request.user).first()
             student, s_created = Student.objects.get_or_create(
                 user=user,
+                hod=hod_user,
                 defaults={"roll_no": roll_no}
             )
 

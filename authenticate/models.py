@@ -9,7 +9,9 @@ class CustomUser(AbstractUser):
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+    
     is_email_verified = models.BooleanField(default=False)
+    
 
     
 

@@ -26,7 +26,7 @@ urlpatterns = [
 
     path('add_attendance/', views.add_attendance, name='add_attendance'),
     path('view_attendance/', views.view_attendance, name='view_attendance'),
-
+    # path('register/', views.register, name ='register')
 
 
     
